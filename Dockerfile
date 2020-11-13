@@ -11,7 +11,7 @@ RUN apk update && apk add \
 COPY ./build-and-test-bindings.sh /root/build-and-test-bindings.sh
 RUN chmod +x /root/build-and-test-bindings.sh
 
-ENTRYPOINT ["/build-and-test-bindings.sh"]
+ENTRYPOINT ["/root/build-and-test-bindings.sh"]
 
 
 
