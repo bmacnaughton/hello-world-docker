@@ -1,8 +1,17 @@
-FROM alpine:3.10
+FROM mhart/alpine-node:12
 
-COPY ./entrypoint.sh /entrypoint.sh
-COPY ./build-and-test-bindings.sh /build-and-test-bindings.sh
-RUN chmod +x /entrypoint.sh
+RUN apk update && apk add \
+  g++ \
+  python \
+  make \
+  git \
+  curl \
+  nano
 
-#ENTRYPOINT ["/entrypoint.sh"]
+COPY ./build-and-test-bindings.sh /root/build-and-test-bindings.sh
+RUN chmod +x /root/build-and-test-bindings.sh
+
 ENTRYPOINT ["/build-and-test-bindings.sh"]
+
+
+
