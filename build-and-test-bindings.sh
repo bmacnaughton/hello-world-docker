@@ -7,12 +7,21 @@ git clone --depth=1 https://github.com/appoptics/appoptics-bindings-node aob -b 
 cd aob || exit 1
 
 # make sure production install works
-npm install --production --unsafe-perm
+if ! npm install --production --unsafe-perm; then
+  error=true
+fi
 
-# look around
-ls -l
-pwd
+rm -rf node_modules
+
+# install so testing works
+if ! npm install --unsafe-perm; then
+  error=true
+fi
 
 # test
-npm install -g mocha
-npm test
+npm install -g mocha || error=true
+npm test || error=true
+
+if [ -n "$error" ]; then
+  exit 1
+fi
