@@ -1,6 +1,8 @@
 #!/bin/sh -l
 
 branch="$1"
+# shellcheck disable=SC2034 # used by appoptics-bindings in tests
+AO_TOKEN_PROD="$2"
 
 cd "$GITHUB_WORKSPACE" || exit 1
 git clone --depth=1 https://github.com/appoptics/appoptics-bindings-node aob -b "$branch"
