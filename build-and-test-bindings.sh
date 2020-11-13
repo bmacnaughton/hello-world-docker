@@ -1,7 +1,9 @@
 #!/bin/sh -l
 
+branch="$1"
+
 cd "$GITHUB_WORKSPACE" || exit 1
-git clone --depth=1 https://github.com/appoptics/appoptics-bindings-node aob
+git clone --depth=1 https://github.com/appoptics/appoptics-bindings-node aob -b "$branch"
 cd aob || exit 1
 
 # make sure production install works
