@@ -3,5 +3,10 @@
 cd /root || exit 1
 git clone --depth=1 https://github.com/appoptics/appoptics-bindings-node aob
 cd aob || exit 1
-npm install -g mocha
+
+# make sure install works
 npm install --production --unsafe-perm
+
+# test
+npm install -g mocha
+npm test
