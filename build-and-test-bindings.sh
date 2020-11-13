@@ -16,7 +16,3 @@ pwd
 # test
 npm install -g mocha
 npm test
-
-# again
-ls -l
-pwd
