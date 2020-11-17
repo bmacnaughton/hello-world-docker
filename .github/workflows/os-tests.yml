@@ -50,6 +50,8 @@ jobs:
           dockerfile: ${{matrix.operating-system}}
           branch-to-test: 'github-actions'
           ao-token-prod: ${{secrets.AO_TOKEN_PROD}}
+        env:
+          D_IMAGE: ${{matrix.operating-system}}
 
       - name: get install production results
         run: echo "npm install --production --unsafe-perm ${{steps.os.outputs.results}}"

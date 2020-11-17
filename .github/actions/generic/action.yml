@@ -20,7 +20,7 @@ outputs:
 
 runs:
   using: 'docker'
-  image: ${{inputs.dockerfile}}.Dockerfile
+  image: $D_IMAGE.Dockerfile
   args:
     - ${{inputs.branch-to-test}}
     - ${{inputs.ao-token-prod}}
