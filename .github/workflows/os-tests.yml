@@ -1,61 +1,56 @@
 name: bindings-os-tests extend tests to alpine & centos
 on: [push, workflow_dispatch]
 
-jobs:
-  test-bindings-on-alpine:
-    runs-on: ubuntu-latest
-    name: install and test bindings on alpine
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: install and test bindings
-        id: alpine
-        uses: ./.github/actions/alpine
-        with:
-          branch-to-test: 'github-actions'
-          #ao-token-prod: ${{secrets.AO_TOKEN_PROD}}
-      - name: get results
-        run: echo "os-tests.yml results ${{steps.alpine.outputs.results}}"
-
-  test-bindings-on-centos:
-    runs-on: ubuntu-latest
-    name: install and test bindings on centos
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: install and test bindings
-        id: centos
-        uses: ./.github/actions/centos
-        with:
-          branch-to-test: 'github-actions'
-          #ao-token-prod: ${{secrets.AO_TOKEN_PROD}}
-      - name: get results
-        run: echo "os-tests.yml results ${{steps.centos.outputs.results}}"
-
 #jobs:
-#  test:
+#  test-bindings-on-alpine:
 #    runs-on: ubuntu-latest
-#    name: install and test bindings
-#
-#    strategy:
-#      matrix:
-#        operating-system: [alpine, centos]
-#
+#    name: install and test bindings on alpine
 #    steps:
 #      - uses: actions/checkout@v2
-#      - name: install and test on ${{matrix.operating-system}}
-#        id: os
-#        uses: ./.github/actions/generic
-#        with:
-#          dockerfile: ${{matrix.operating-system}}
-#          branch-to-test: 'github-actions'
-#          ao-token-prod: ${{secrets.AO_TOKEN_PROD}}
 #
-#      - name: get install production results
-#        run: echo "npm install --production --unsafe-perm ${{steps.os.outputs.install-prod}}"
-#      - name: get install dev results
-#        run: echo "npm install --unsafe-perm ${{steps.os.outputs.install-dev}}"
-#      - name: get tests passed count
-#        run: echo "tests passed ${{steps.os.outputs.tests-passed-count}}"
-#      - name: get tests failed
-#        run: echo "tests failed ${{steps.os.outputs.tests-failed-count}} - ${{steps.os.outputs.tests-failed}}"
+#      - name: install and test bindings
+#        id: alpine
+#        uses: ./.github/actions/alpine
+#        with:
+#          branch-to-test: 'github-actions'
+#          #ao-token-prod: ${{secrets.AO_TOKEN_PROD}}
+#      - name: get results
+#        run: echo "os-tests.yml results ${{steps.alpine.outputs.results}}"
+#
+#  test-bindings-on-centos:
+#    runs-on: ubuntu-latest
+#    name: install and test bindings on centos
+#    steps:
+#      - uses: actions/checkout@v2
+#
+#      - name: install and test bindings
+#        id: centos
+#        uses: ./.github/actions/centos
+#        with:
+#          branch-to-test: 'github-actions'
+#          #ao-token-prod: ${{secrets.AO_TOKEN_PROD}}
+#      - name: get results
+#        run: echo "os-tests.yml results ${{steps.centos.outputs.results}}"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: install and test bindings
+
+    strategy:
+      matrix:
+        operating-system: [alpine, centos]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: install and test on ${{matrix.operating-system}}
+        id: os
+        uses: ./.github/actions/generic
+        with:
+          dockerfile: ${{matrix.operating-system}}
+          branch-to-test: 'github-actions'
+          ao-token-prod: ${{secrets.AO_TOKEN_PROD}}
+
+      - name: get install production results
+        run: echo "npm install --production --unsafe-perm ${{steps.os.outputs.results}}"
+
