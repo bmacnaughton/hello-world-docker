@@ -1,6 +1,7 @@
 # action.yml
 name: 'run tests in dockerfile'
 description: 'install bindings and run tests on dockerfile'
+
 inputs:
   dockerfile:
     description: 'which dockerfile to use'
@@ -12,17 +13,11 @@ inputs:
   ao-token-prod:
     description: 'appoptics token valid in production environment'
     required: true
+
 outputs:
-  install-prod:
-    description: 'production installation result'
-  install-dev:
-    description: 'development installation result'
-  tests-passed-count:
-    description: 'number of tests that succeeded'
-  tests-failed-count:
-    description: 'number of tests that failed'
-  tests-failed:
-    description: 'tests that failed'
+  result:
+    description: 'result from build-and-test-bindings.sh'
+
 runs:
   using: 'docker'
   image: ${{inputs.dockerfile}}.Dockerfile
