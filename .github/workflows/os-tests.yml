@@ -1,5 +1,5 @@
 name: bindings-os-tests extend tests to alpine & centos
-on: [push, workflow_dispatch]
+on: [workflow_dispatch]
 
 #jobs:
 #  test-bindings-on-alpine:
